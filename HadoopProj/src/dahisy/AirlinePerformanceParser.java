@@ -1,6 +1,7 @@
 package dahisy;
 
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.conf.Configuration;
 
 public class AirlinePerformanceParser {
 	private int year;
@@ -16,8 +17,15 @@ public class AirlinePerformanceParser {
 	
 	private String uniqueCarrier;
 	
+	
+	
 	public AirlinePerformanceParser(Text text) {
 		try {
+			 Configuration conf = new Configuration();
+			 conf.set("fs.default.name", "hdfs://192.168.56.108:9000");  
+			 conf.set("mapred.job.tracker", "192.168.56.108:9001"); 
+			 conf.set("mapred.jar","C:/dev/hadoop/a.jar");  
+			    
 			String[] colums = text.toString().split(",");
 			
 			//운행 연도 설정
